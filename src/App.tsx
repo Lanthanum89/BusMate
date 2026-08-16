@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { stops, stopUrl, type StopGroup } from './data/stops'
+import { ROUTE_COLOR_HEX, stops, stopUrl, type StopGroup } from './data/stops'
 
 type Theme = 'light' | 'dark'
 
@@ -85,7 +85,14 @@ function App() {
         {visibleStops.map((stop) => (
           <li key={stop.id}>
             <a className="stop-card" href={stopUrl(stop.code)} target="_blank" rel="noreferrer">
-              <span className="stop-label">{stop.label}</span>
+              <span className="stop-name">
+                <span
+                  className="stop-swatch"
+                  style={{ backgroundColor: ROUTE_COLOR_HEX[stop.color] }}
+                  title={`${stop.color} route`}
+                />
+                <span className="stop-label">{stop.label}</span>
+              </span>
               <span className="stop-meta">
                 <span className="stop-code">{stop.code}</span>
                 <ExternalLinkIcon />

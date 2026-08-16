@@ -127,6 +127,21 @@ body {
   background: var(--accent-tint);
 }
 
+.stop-name {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.stop-swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 0.2rem;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
 .stop-label {
   font-weight: 600;
   font-size: 1rem;
