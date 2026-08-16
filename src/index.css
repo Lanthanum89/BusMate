@@ -109,40 +109,33 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.map-panel {
-  position: relative;
-  height: 220px;
+.time-panel {
   border-radius: 1rem;
-  overflow: hidden;
   border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1.1rem 1.25rem;
   margin-bottom: 1.5rem;
 }
 
-.map-canvas {
-  height: 100%;
-  width: 100%;
-}
-
-.map-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  margin: 0;
+.time-greeting {
+  margin: 0 0 0.15rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--muted);
+}
+
+.time-clock {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+
+.time-date {
+  margin: 0.35rem 0 0;
   font-size: 0.85rem;
-  background: var(--surface);
-}
-
-.leaflet-control-attribution {
-  background: var(--surface) !important;
-  color: var(--muted) !important;
-  border-radius: 0.25rem;
-  font-size: 0.65rem !important;
-}
-
-.leaflet-control-attribution a {
-  color: var(--accent) !important;
+  color: var(--muted);
 }
 
 .group-button {

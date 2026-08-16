@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { LocationMap } from './components/LocationMap'
-import { getCoords, type Coords } from './lib/geolocation'
 import { ROUTE_COLOR_HEX, ROUTE_TEXT_HEX, stops, stopUrl, type StopGroup } from './data/stops'
 
 type Theme = 'light' | 'dark'
@@ -18,6 +16,12 @@ function getInitialTheme(): Theme {
 function getInitialGroup(): StopGroup {
   const param = new URLSearchParams(window.location.search).get('group')
   return param === 'town' ? 'town' : 'home'
+}
+
+function getGreeting(hour: number): string {
+  if (hour < 12) return 'Good morning'
+  if (hour < 18) return 'Good afternoon'
+  return 'Good evening'
 }
 
 function SunIcon() {
@@ -68,7 +72,7 @@ function ExternalLinkIcon() {
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
   const [group, setGroup] = useState<StopGroup>(getInitialGroup)
-  const [coords, setCoords] = useState<Coords | null>(null)
+  const [now, setNow] = useState(() => new Date())
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -76,16 +80,14 @@ function App() {
   }, [theme])
 
   useEffect(() => {
-    let cancelled = false
-    getCoords().then((c) => {
-      if (!cancelled) setCoords(c)
-    })
-    return () => {
-      cancelled = true
-    }
+    const id = setInterval(() => setNow(new Date()), 1000)
+    return () => clearInterval(id)
   }, [])
 
   const visibleStops = stops.filter((stop) => stop.group === group)
+  const greeting = getGreeting(now.getHours())
+  const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false })
+  const dateStr = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 
   return (
     <div className="app">
@@ -113,12 +115,10 @@ function App() {
         ))}
       </div>
 
-      <div className="map-panel">
-        {coords ? (
-          <LocationMap lat={coords.lat} lon={coords.lon} theme={theme} />
-        ) : (
-          <p className="map-loading">Locating…</p>
-        )}
+      <div className="time-panel">
+        <p className="time-greeting">{greeting}</p>
+        <p className="time-clock">{timeStr}</p>
+        <p className="time-date">{dateStr}</p>
       </div>
 
       <ul className="stop-grid">
