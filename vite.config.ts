@@ -30,6 +30,20 @@ export default defineConfig({
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
           { src: 'icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
+        shortcuts: [
+          {
+            name: 'Home stops',
+            short_name: 'Home',
+            url: `${base}?group=home`,
+            icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }],
+          },
+          {
+            name: 'Town stops',
+            short_name: 'Town',
+            url: `${base}?group=town`,
+            icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }],
+          },
+        ],
       },
     }),
   ],

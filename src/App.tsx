@@ -12,6 +12,12 @@ function getInitialTheme(): Theme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
+// Lets the home-screen shortcuts (see vite.config.ts) jump straight to a group.
+function getInitialGroup(): StopGroup {
+  const param = new URLSearchParams(window.location.search).get('group')
+  return param === 'town' ? 'town' : 'home'
+}
+
 function SunIcon() {
   return (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -59,7 +65,7 @@ function ExternalLinkIcon() {
 
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
-  const [group, setGroup] = useState<StopGroup>('home')
+  const [group, setGroup] = useState<StopGroup>(getInitialGroup)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
