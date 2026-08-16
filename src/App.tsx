@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { LocationMap } from './components/LocationMap'
+import { getCoords, type Coords } from './lib/geolocation'
 import { ROUTE_COLOR_HEX, ROUTE_TEXT_HEX, stops, stopUrl, type StopGroup } from './data/stops'
 
 type Theme = 'light' | 'dark'
@@ -66,11 +68,22 @@ function ExternalLinkIcon() {
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
   const [group, setGroup] = useState<StopGroup>(getInitialGroup)
+  const [coords, setCoords] = useState<Coords | null>(null)
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     localStorage.setItem('theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    let cancelled = false
+    getCoords().then((c) => {
+      if (!cancelled) setCoords(c)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const visibleStops = stops.filter((stop) => stop.group === group)
 
@@ -98,6 +111,14 @@ function App() {
             {GROUP_LABELS[g]}
           </button>
         ))}
+      </div>
+
+      <div className="map-panel">
+        {coords ? (
+          <LocationMap lat={coords.lat} lon={coords.lon} theme={theme} />
+        ) : (
+          <p className="map-loading">Locating…</p>
+        )}
       </div>
 
       <ul className="stop-grid">
