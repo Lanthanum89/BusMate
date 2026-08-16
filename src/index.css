@@ -209,11 +209,3 @@ body {
   text-align: center;
   padding: 1.5rem 0;
 }
-
-.privacy-note {
-  margin-top: auto;
-  padding-top: 2rem;
-  color: var(--muted);
-  font-size: 0.75rem;
-  text-align: center;
-}

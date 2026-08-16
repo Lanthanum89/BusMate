@@ -114,8 +114,6 @@ function App() {
           <li className="stop-empty">No {GROUP_LABELS[group].toLowerCase()} stops yet.</li>
         )}
       </ul>
-
-      <p className="privacy-note">No accounts, no tracking. Taps open reading-buses.co.uk directly.</p>
     </div>
   )
 }
