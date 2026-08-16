@@ -36,6 +36,20 @@ function MoonIcon() {
   )
 }
 
+function BusIcon({ color, label }: { color: string; label: string }) {
+  return (
+    <svg viewBox="0 0 24 24" width="22" height="22" className="stop-bus-icon" role="img" aria-label={`${label} route`}>
+      <title>{`${label} route`}</title>
+      <rect x="2.5" y="5" width="19" height="12" rx="3" fill={color} stroke="var(--muted)" strokeWidth="0.75" strokeOpacity="0.5" />
+      <rect x="5.5" y="7.5" width="3.5" height="3.5" rx="0.6" fill="var(--surface)" />
+      <rect x="10.25" y="7.5" width="3.5" height="3.5" rx="0.6" fill="var(--surface)" />
+      <rect x="15" y="7.5" width="3.5" height="3.5" rx="0.6" fill="var(--surface)" />
+      <circle cx="7" cy="17" r="2" fill="var(--text)" />
+      <circle cx="17" cy="17" r="2" fill="var(--text)" />
+    </svg>
+  )
+}
+
 function ExternalLinkIcon() {
   return (
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="stop-arrow">
@@ -86,17 +100,10 @@ function App() {
           <li key={stop.id}>
             <a className="stop-card" href={stopUrl(stop.code)} target="_blank" rel="noreferrer">
               <span className="stop-name">
-                <span
-                  className="stop-swatch"
-                  style={{ backgroundColor: ROUTE_COLOR_HEX[stop.color] }}
-                  title={`${stop.color} route`}
-                />
+                <BusIcon color={ROUTE_COLOR_HEX[stop.color]} label={stop.label} />
                 <span className="stop-label">{stop.label}</span>
               </span>
-              <span className="stop-meta">
-                <span className="stop-code">{stop.code}</span>
-                <ExternalLinkIcon />
-              </span>
+              <ExternalLinkIcon />
             </a>
           </li>
         ))}

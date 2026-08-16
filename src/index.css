@@ -134,11 +134,7 @@ body {
   min-width: 0;
 }
 
-.stop-swatch {
-  width: 0.65rem;
-  height: 0.65rem;
-  border-radius: 0.2rem;
-  border: 1px solid var(--border);
+.stop-bus-icon {
   flex-shrink: 0;
 }
 
@@ -147,21 +143,9 @@ body {
   font-size: 1rem;
 }
 
-.stop-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--muted);
-  flex-shrink: 0;
-}
-
-.stop-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.75rem;
-}
-
 .stop-arrow {
   flex-shrink: 0;
+  color: var(--muted);
 }
 
 .stop-empty {
