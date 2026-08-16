@@ -7,6 +7,12 @@ export const ROUTE_COLOR_HEX: Record<RouteColor, string> = {
   black: '#18181b',
 }
 
+// Text/icon colour for each card, chosen for contrast against its background above.
+export const ROUTE_TEXT_HEX: Record<RouteColor, string> = {
+  yellow: '#1a1f2b',
+  black: '#ffffff',
+}
+
 export interface BusStop {
   id: string
   code: string

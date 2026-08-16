@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ROUTE_COLOR_HEX, stops, stopUrl, type StopGroup } from './data/stops'
+import { ROUTE_COLOR_HEX, ROUTE_TEXT_HEX, stops, stopUrl, type StopGroup } from './data/stops'
 
 type Theme = 'light' | 'dark'
 
@@ -36,16 +36,15 @@ function MoonIcon() {
   )
 }
 
-function BusIcon({ color, label }: { color: string; label: string }) {
+function BusIcon() {
   return (
-    <svg viewBox="0 0 24 24" width="22" height="22" className="stop-bus-icon" role="img" aria-label={`${label} route`}>
-      <title>{`${label} route`}</title>
-      <rect x="2.5" y="5" width="19" height="12" rx="3" fill={color} stroke="var(--muted)" strokeWidth="0.75" strokeOpacity="0.5" />
-      <rect x="5.5" y="7.5" width="3.5" height="3.5" rx="0.6" fill="var(--surface)" />
-      <rect x="10.25" y="7.5" width="3.5" height="3.5" rx="0.6" fill="var(--surface)" />
-      <rect x="15" y="7.5" width="3.5" height="3.5" rx="0.6" fill="var(--surface)" />
-      <circle cx="7" cy="17" r="2" fill="var(--text)" />
-      <circle cx="17" cy="17" r="2" fill="var(--text)" />
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="stop-bus-icon" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="12" rx="3" />
+      <path d="M3 11h18" />
+      <path d="M8 5v6" />
+      <path d="M16 5v6" />
+      <circle cx="7.5" cy="17.4" r="1.6" />
+      <circle cx="16.5" cy="17.4" r="1.6" />
     </svg>
   )
 }
@@ -95,15 +94,19 @@ function App() {
         ))}
       </div>
 
-      <ul className="stop-list">
+      <ul className="stop-grid">
         {visibleStops.map((stop) => (
           <li key={stop.id}>
-            <a className="stop-card" href={stopUrl(stop.code)} target="_blank" rel="noreferrer">
-              <span className="stop-name">
-                <BusIcon color={ROUTE_COLOR_HEX[stop.color]} label={stop.label} />
-                <span className="stop-label">{stop.label}</span>
-              </span>
+            <a
+              className="stop-card"
+              href={stopUrl(stop.code)}
+              target="_blank"
+              rel="noreferrer"
+              style={{ backgroundColor: ROUTE_COLOR_HEX[stop.color], color: ROUTE_TEXT_HEX[stop.color] }}
+            >
+              <BusIcon />
               <ExternalLinkIcon />
+              <span className="stop-label">{stop.label}</span>
             </a>
           </li>
         ))}
