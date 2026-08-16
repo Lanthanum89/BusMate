@@ -21,6 +21,7 @@ export interface BusStop {
 export const stops: BusStop[] = [
   { id: 'ikea', code: '030054700001', label: 'Towards IKEA', group: 'home', color: 'yellow' },
   { id: 'home-station', code: '030054700002', label: 'Towards Station', group: 'home', color: 'yellow' },
+  { id: 'langley-hill', code: '030054120001', label: 'Langley Hill', group: 'home', color: 'black' },
   { id: 'town-station', code: '039028150004', label: 'Station', group: 'town', color: 'yellow' },
   { id: 'blagrave', code: '039028150001', label: 'Blagrave', group: 'town', color: 'black' },
 ]
